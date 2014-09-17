@@ -1,0 +1,164 @@
+
+body.not-home .top-bar-section ul>a:hover {
+    color:#0065a4 !important;
+}
+body.not-home .top-bar-section ul>a:hover li {
+    color:#0065a4 !important;
+}
+
+.screen-reader-text {
+    display:none;
+}
+
+.clear {
+    clear:both;
+    display:block;
+}
+
+.search_top {
+    float:none;
+}
+
+.slide>.row>.large-12 {
+    overflow:hidden;
+}
+
+.overlay p {
+    color:#FFF;
+}
+
+.paging-navigation {
+    margin:10px 0 30px;
+}
+
+.activity-pain {
+    overflow-y:auto;
+}
+
+.entry-meta .author {
+    display:inline-block;
+}
+
+.entry-footer {
+    margin: 10px 0 20px;
+}
+
+.post-navigation {
+    margin: 10px 0 20px;
+}
+
+.right-sidebar .overlay>h6 {
+    padding-top: 20px;
+}
+
+.mailing-subscribe .email {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==);
+    background-attachment: scroll;
+    cursor: auto;
+    background-position: 100% 50%;
+    background-repeat: no-repeat no-repeat;
+}
+
+.subscribe-error, .subscribe-success {
+    padding:0;
+    margin:0 0 5px;
+    font-size:14px;
+    font-style:italic;
+}
+.subscribe-error {
+    color:#ffadad !important;
+}
+.subscribe-success {
+    color:#b1ffa0 !important;
+}
+
+.wpcf7-radio .wpcf7-list-item {
+    display:block;
+}
+.wpcf7-radio .wpcf7-list-item-label {
+    color:#4d4d4d;
+    font-size: 0.875rem;
+    color: #4d4d4d;
+    cursor: pointer;
+    font-weight: normal;
+    line-height: 1.5;
+}
+.feedback-share-story textarea {
+    height:100px !important;
+}
+
+input.wpcf7-not-valid,
+textarea.wpcf7-not-valid,
+select.wpcf7-not-valid {
+    border:1px solid red;
+}
+
+body.page-template-templatefeedback-php div.wpcf7-mail-sent-ok {
+    display:none !important;
+}
+
+.bodypart-blue-block .small-8,
+.activity-content .small-8,
+.condition-content .small-8 {
+    float:left;
+}
+.bodypart-blue-block .small-4,
+.activity-content .small-4,
+.condition-content .small-4 {
+    float:right;
+}
+.bodypart-blue-block .small-4 img,
+.activity-content .small-4 img,
+.condition-content .small-4 img {
+    margin-top:10px;
+}
+.body-part-condition {
+    border-bottom:1px solid #EEE;
+}
+.body-part-condition h3 {
+    font-size:20px;
+}
+
+.preventions {
+    margin:20px 15px 10px;
+}
+.preventions li {
+
+}
+.preventions li .prevention-title {
+    color:#0065a4;
+    padding-right:10px;
+}
+
+.condition-symptoms {
+    margin-top:20px;
+}
+.condition-treatment {
+
+}
+.condition-treatment strong {
+    display:block;
+    margin-bottom:5px;
+}
+.condition-treatment p {
+    line-height:16px;
+    font-size:14px;
+}
+
+.slick-prev:before, .slick-next:before {
+    line-height: 0 !important;
+}
+
+@media screen and (min-width: 1200px) {
+    .slick-slide {
+        padding-top: 10.5%;
+    }
+}
+
+.page-template-templateosm-conference-php .events-tabs .tab-title {
+    border-right: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+.page-template-templateosm-conference-php .events-tabs .tab-title:first-child {
+    border-left: 1px solid #eeeeee;
+}

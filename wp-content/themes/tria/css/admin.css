@@ -1,0 +1,132 @@
+
+.wen-custom-list {
+    clear:both;
+    display:block;
+}
+.wen-custom-list-inline-rows {
+    width:37%;
+}
+.wen-custom-list li {
+    font-weight:bold;
+    background:#EAEAEA;
+    color:#333;
+    display:block;
+    line-height:25px;
+}
+.wen-custom-list li a {
+    color:inherit;
+    text-decoration:none;
+    padding:0 8px;
+}
+.wen-custom-list li a.ct-item-delete {
+    float:right;
+}
+.wen-custom-list-inline li {
+    width:calc(25% - 2px);
+    float:left;
+    margin-right:2px;
+}
+.wen-custom-list li.item-active,
+.wen-custom-list li:hover {
+    background:#333;
+    color:#EAEAEA;
+}
+.wen-custom-list li.item-active a,
+.wen-custom-list li:hover a {
+    color:inherit;
+}
+.wen-custom-list li a.ct-item-delete:hover {
+    background:#e20f0f;
+    color:#FFF;
+}
+.wen-custom-list li label {
+    padding:7px 5px;
+    display:block;
+}
+.wen-custom-list-inline-rows li label {
+    padding:7px 25px;
+}
+.wen-custom-list li .item-icon {
+    border-radius:25px;
+    background:#333;
+    width:25px;
+    display:inline-block;
+    margin-right:20px;
+    text-align: center;
+}
+.wen-custom-list li.item-active .item-icon,
+.wen-custom-list li:hover .item-icon {
+    background:#EAEAEA;
+    color:#333;
+}
+.wen-custom-list li .item-icon>img {
+    width: 80%;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.wen-custom-dialog, .wen-df-dialog {
+    display:none;
+    width:300px;
+    height:auto;
+    padding:10px;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:100;
+    color:#EAEAEA;
+    background:#333;
+    border:1px solid #666;
+}
+.wen-custom-dialog>label,
+.wen-df-dialog>label
+{
+    display:block;
+    clear:both;
+    margin-bottom:10px;
+    line-height:25px;
+}
+.wen-custom-dialog>label>input,
+.wen-df-dialog>label>input {
+    float:right;
+    width:200px;
+}
+
+.ct-pick-from-media {
+    float:right;
+}
+.submit-ct-data,
+.cancel-ct-data {
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-top:5px !important;
+}
+
+#normal-sortables .acf_postbox .field_type-repeater .select2-container {
+    width:100%;
+}
+
+.post-type-feedback #normal-sortables .field_type-radio p.label,
+.post-type-feedback #normal-sortables .field_type-radio .acf-radio-list {
+    width:100% !important;
+}
+div.repeater td.remove a{
+    /*border:1px red solid;
+    display: block;
+    visibility: visible;
+    */
+}
+div.repeater td.remove a.acf-button-remove{
+    display: block;
+    visibility: visible;
+}
+div.repeater td.remove a.acf-button-add{
+    margin: -30px 0 0 !important;
+}
+
+.field_type-date_time_picker{
+    width:47%;
+    float:left !important;
+    clear:initial !important;
+}

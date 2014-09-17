@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: NS Featured Posts\n"
+"POT-Creation-Date: 2014-07-15 22:08+0545\n"
+"PO-Revision-Date: 2014-07-15 22:08+0545\n"
+"Last-Translator: Nilambar Sharma <nilambar@outlook.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../../ns-featured-posts\n"
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:170
+msgid "NS Featured Posts Settings Page"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:170
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:10
+msgid "NS Featured Posts"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:201
+msgid "Settings"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:224
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:347
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:437
+msgid "Featured"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:346
+msgid "Show all"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:348
+msgid "Not Featured"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:474
+msgid "NS Featured Posts Settings"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:476
+msgid "Enabled Featured for"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:494
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:93
+msgid "Post"
+msgstr ""
+
+#: ../../ns-featured-posts/class-ns-featured-posts-admin.php:498
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:94
+msgid "Page"
+msgstr ""
+
+#: ../../ns-featured-posts/views/admin.php:37
+msgid "Save Changes"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:9
+msgid "NS Featured Posts Widget"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:19
+msgid "Featured Posts"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:58
+msgid "No featured found"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:85
+msgid "Title:"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:88
+msgid "Number of posts to show:"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:91
+msgid "Post Type:"
+msgstr ""
+
+#: ../../ns-featured-posts/widgets/nsfp-featured-post-widget.php:113
+msgid "Display post date?"
+msgstr ""

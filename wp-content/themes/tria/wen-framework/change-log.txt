@@ -1,0 +1,6 @@
+= 1.0.1 =
+* Bug fixing
+* Add 'show_title' parameter in social links
+ 
+= 1.0.0 =
+* Initial release

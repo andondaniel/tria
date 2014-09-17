@@ -1,0 +1,23 @@
+
+.clear {
+    clear:both;
+    display:block;
+}
+
+.slide>.row>.large-12 {
+    overflow:hidden;
+}
+
+.overlay p {
+    color:#FFF;
+}
+
+.activity-pain {
+    overflow-y:auto;
+}
+
+@media screen and (min-width: 1200px) {
+    .slick-slide {
+        padding-top: 10.5%;
+    }
+}

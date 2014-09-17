@@ -1,0 +1,293 @@
+/*------------------login page css--------------------------*/
+
+body.login {
+
+	background-image: url('images/login-body-bg.png');
+
+    display: table;
+
+    width: 100%;
+
+}
+
+
+
+body.login div#login h1 a {
+
+    background-size: inherit;
+
+    display: block;
+
+    height: 40px;
+
+    margin: 0 auto;
+
+    padding-top: 30px;
+
+    transition: all 0.3s ease 0s;
+
+    width: 100%;
+
+}
+
+/*body.login div#login h1 a {
+
+    background-image: url("images/logo.png");
+
+
+    clear: both;
+
+    min-height: 18px !important;
+
+    width: 375px !important;
+
+
+
+}*/
+
+body.login div#login {
+
+    background: url("images/ul-bg.png") no-repeat scroll center bottom transparent;
+
+    margin: 160px auto 0;
+
+    padding: 0;
+
+    max-width: 960px;
+
+    width: 100%;
+
+
+
+}
+
+body.login div#login h1 {
+
+    background: url("images/ul-bgr.png") no-repeat scroll center top transparent;
+
+    padding: 40px 0 0;
+
+}
+
+body.login div#login h1 a {
+
+    display: block;
+
+    height: 40px;
+
+    margin: 0 auto;
+
+    padding-top: 30px;
+
+    transition: all 0.3s ease 0s;
+
+    -webkit-transition: all 0.3s ease 0s;
+
+    -moz-transition: all 0.3s ease 0s;
+
+    -o-transition: all 0.3s ease 0s;
+
+    width: 100%;
+
+    background-size: inherit;
+
+       margin-bottom: 20px;
+
+}
+
+
+
+
+
+body.login div#login h1 a:hover{
+
+	opacity: 0.5;
+
+    filter:Alpha(opacity=50); /* For IE8 and earlier */
+
+}
+
+body.login div#login form
+ {
+
+    background: none repeat scroll 0 0 transparent;
+
+    border: medium none;
+
+    box-shadow: none;
+
+    margin: 0 auto;
+
+    padding: 0;
+
+    max-width: 315px;
+
+    width: 90%;
+
+}
+
+body.login div#login form#loginform p {}
+
+
+
+body.login div#login form#loginform p label br {
+
+    display: none;
+
+}
+
+body.login div#login form#loginform input.input {
+
+    background-color: rgb(249, 249, 249);
+
+    border: 1px solid rgb(187, 188, 190);
+
+    border-radius: 0 0 0 0;
+
+    color: rgb(166, 178, 186);
+
+    font-family: arial;
+
+    font-size: 14px;
+
+    font-weight: normal;
+
+    height: 35px;
+
+    line-height: 20px;
+
+    margin: 0 0 15px;
+
+    padding-left: 7%;
+
+    width: 100%;
+
+}
+
+body.login div#login form#loginform input#user_login {background: url("images/login-icon.png") no-repeat scroll 1px 3px rgb(249, 249, 249);}
+
+body.login div#login form#loginform input#user_pass {background: url("images/login-icon.png") no-repeat scroll 1px -25px rgb(249, 249, 249);}
+
+body.login div#login form#loginform p.forgetmenot label {
+
+	border: medium none;
+
+    color: rgb(147, 149, 152) !important;
+
+    float: left;
+
+    font-family: open sans;
+
+    font-size: 15px !important;
+
+}
+
+body.login div#login form#loginform p.forgetmenot input#rememberme {
+
+	margin-top: 4px;
+
+    vertical-align: top;
+
+}
+
+body.login div#login form#loginform p.submit {}
+
+
+
+body.login div#login form#loginform p.submit input#wp-submit {
+
+    background-image: linear-gradient(to bottom, rgb(38, 169, 224), rgb(34, 149, 197));
+
+    box-shadow: 1px 2px 0 rgba(120, 200, 230, 0.5) inset;
+
+    width: 68px;
+
+    font-size: 15px;
+
+}
+
+
+
+body.login div#login form#loginform p.submit input#wp-submit:hover {
+
+    text-shadow: none;
+
+}
+
+body.login div#login p#nav {
+
+    clear: both;
+
+    margin: 0 auto;
+
+    max-width: 315px;
+
+    padding: 0 0 40px;
+
+    width: 94%;
+
+}
+
+body.login div#login p#nav a {}
+
+body.login div#login p#backtoblog {
+
+    margin: 0 auto;
+
+    padding: 5px 5px 45px;
+
+    max-width: 315px;
+
+    width: 96%;
+
+    margin-top: 5px;
+
+    display: none;
+
+}
+
+
+
+body.login div#login p#backtoblog a {
+
+    background-color: rgb(33, 117, 155);
+
+    background-image: linear-gradient(to bottom, rgb(42, 149, 197), rgb(33, 117, 155));
+
+    border: 1px solid rgb(38, 122, 160);
+
+    border-radius: 3px 3px 3px 3px;
+
+    box-shadow: 0 1px 0 rgba(120, 200, 230, 0.8) inset;
+
+    color: rgb(255, 255, 255) !important;
+
+    padding: 5px 10px;
+
+    text-decoration: none;
+
+    text-shadow: none;
+
+}
+
+body.login div#login p#backtoblog a:hover{
+
+background-color:rgb(39, 138, 183);
+
+background-image: linear-gradient(to bottom, rgb(46, 159, 210), rgb(33, 117, 155));
+
+}
+
+
+
+#login #login_error, #login .message {
+
+    margin: 0 auto 10px;
+
+    max-width: 315px;
+
+    width: 84%;
+
+    text-align: center;
+
+}
