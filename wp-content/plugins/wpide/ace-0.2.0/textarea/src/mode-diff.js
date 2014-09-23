@@ -57,7 +57,7 @@ __ace_shadowed__.define('ace/mode/diff_highlight_rules', ['require', 'exports', 
 var oop = require("../lib/oop");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
-var DiffHighlightRules = function() {
+var DiffHighlightRules = function() {
 
     this.$rules = {
         "start" : [{

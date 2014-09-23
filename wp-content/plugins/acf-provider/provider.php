@@ -15,6 +15,7 @@ class acf_field_provider extends acf_field
 		$this->defaults = array(
 			'sort_by'    =>	'last_name',
 			'sort_order' =>	'asc',
+			'allow_null' =>	1,
 		);
 
 		// do not delete!
@@ -85,6 +86,27 @@ class acf_field_provider extends acf_field
 			?>
 		</td>
 	</tr>
+	<tr class="field_option field_option_<?php echo $this->name; ?>">
+		<td class="label">
+			<label><?php _e("Allow Null",'acf'); ?></label>
+		</td>
+		<td>
+			<?php
+
+			do_action('acf/create_field', array(
+				'type'		=>	'radio',
+				'name'		=>	'fields['.$key.'][allow_null]',
+				'value'		=>	$field['allow_null'],
+				'layout'	=>	'horizontal',
+				'choices'	=>	array(
+					1 => __('Yes'),
+					0 => __('No'),
+				)
+			));
+
+			?>
+		</td>
+	</tr>
 			<?php
 
 		}
@@ -115,6 +137,10 @@ class acf_field_provider extends acf_field
 			// Change Field into a select
 			$field['type'] = 'select';
 			$field['choices'] = array();
+
+			if ( 1 == $field['allow_null']) {
+				// $field['choices']['null'] = __("Select",'acf');
+			}
 
 			$all_posts = get_posts($args);
 			// nspre($args);

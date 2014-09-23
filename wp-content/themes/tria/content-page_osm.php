@@ -35,7 +35,7 @@ $post_arr = get_posts($args);
         <div class="large-12 columns">
           <ul class="tabs events-tabs" data-tab>
             <li class="tab-title active"><a href="#panel2-1">Speakers &amp; Topics</a></li>
-            <li class="tab-title"><a href="#panel2-2">Continuing Education Credit</a></li>
+            <li class="tab-title"><a href="#panel2-2">Topics</a></li>
             <li class="tab-title"><a href="#panel2-3">Registration</a></li>
             <li class="tab-title"><a href="#panel2-4">Vendors</a></li>
           </ul>
@@ -68,7 +68,7 @@ $post_arr = get_posts($args);
 
                    <div class="large-3 columns conference-speaker">
                      <?php echo $link_open; ?>
-                       <img src="<?php echo esc_url( $speaker_info['speaker_gravatar'] ); ?>">
+                       <img src="<?php echo esc_url( $speaker_info['speaker_gravatar'] ); ?>" style="width:199px;">
                      <?php echo $link_close; ?>
 
                      <b>
@@ -89,9 +89,14 @@ $post_arr = get_posts($args);
                 <?php endif ?>
 
                 <br>
-                <h3>Agenda</h3>
-                <div class="large-6 columns agenda-items">
-                  <?php echo $post_meta['oc_agenda']; ?>
+
+                <h3>Continuing Education Credit</h3>
+                <div class="large-12 columns agenda-items">
+                  <?php $oc_education_credit = $post_meta['oc_education_credit']; ?>
+                  <?php if (!empty($oc_education_credit)): ?>
+                    <?php echo apply_filters('the_content', $oc_education_credit ); ?>
+                  <?php endif ?>
+
                 </div>
                 <div class="large-6 columns agenda-items">
                   &nbsp;
@@ -101,10 +106,9 @@ $post_arr = get_posts($args);
               </div>
 
               <div class="content" id="panel2-2">
-                <?php $oc_education_credit = $post_meta['oc_education_credit']; ?>
-                <?php if (!empty($oc_education_credit)): ?>
-                  <?php echo apply_filters('the_content', $oc_education_credit ); ?>
-                <?php endif ?>
+
+                  <?php echo apply_filters('the_content', $post_meta['oc_agenda'] ); ?>
+
               </div>
 
               <div class="content" id="panel2-3">
@@ -123,7 +127,7 @@ $post_arr = get_posts($args);
           </div>
           <div class="large-3 columns paddingtwenty">
             <?php
-                $register_url = tria_get_registration_url( $post_meta, 'register_url' );
+                $register_url = tria_get_osm_registration_url( $post_meta, 'register_url' );
              ?>
             <a class="button bigbtn" href="<?php echo $register_url; ?>" >Register online</a>
             <h4>LOCATION</h4>
@@ -136,6 +140,20 @@ $post_arr = get_posts($args);
             <?php if (!empty($map_url)): ?>
                 <?php echo $map_url; ?>
             <?php endif ?>
+
+            <?php
+            //  Current Seminar
+            $current_seminar = wen_get_current_event('oc_set_as_current_conference',POST_TYPE_OSM_CONFERENCE);
+            // nspre($current_seminar);
+            //  Get Past Seminars
+            $past_seminars = wen_get_past_events($current_seminar, 'oc_date_from', 'oc_time_from', POST_TYPE_OSM_CONFERENCE);
+            // nspre($past_seminars,'past');
+
+            //  Print the Past Seminars Block
+            wen_print_past_events($past_seminars);
+
+
+             ?>
 
 
             <div class="conference-mailer">

@@ -45,10 +45,10 @@ function tria_register_post_types() {
     cpte_register_post_type(POST_TYPE_DOCTOR, 'Provider', 'Providers', array('title','comments') );
 
     //  Register Custom Post Type : Condition
-    cpte_register_post_type(POST_TYPE_CONDITION, 'Condition', 'Conditions', array('title', 'editor', 'excerpt'), null, array('show_in_menu'=>false,'show_ui'=>false) );
+    cpte_register_post_type(POST_TYPE_CONDITION, 'Condition', 'Conditions', array('title', 'editor', 'excerpt'), null, array('show_in_menu'=>true,'show_ui'=>true) );
 
     //  Register Custom Post Type : Acitivity
-    cpte_register_post_type(POST_TYPE_ACTIVITY, 'Activity', 'Activities', array('title', 'editor', 'thumbnail', 'page-attributes'));
+    cpte_register_post_type(POST_TYPE_ACTIVITY, 'Activity', 'Activities', array('title', 'editor', 'page-attributes'));
 
     //  Register Custom Post Type : Career
     cpte_register_post_type(POST_TYPE_CAREER, 'Career', 'Careers', array('custom-fields'));

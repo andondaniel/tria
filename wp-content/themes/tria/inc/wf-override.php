@@ -82,6 +82,15 @@ function tria_wen_fields($input) {
         'post_type' => 'page',
         'section' => 'content_pages'
     );
+    //  Add the OSM Conference Registration Page Selection
+    $input['cp_osm_registration'] = array(
+        'id' => 'cp_osm_registration',
+        'label' => __('OSM Conference Registration', TEXT_DOMAIN),
+        'desc' => __('Select the OSM Conference Registration Page', TEXT_DOMAIN),
+        'type' => 'custom-post-type-select',
+        'post_type' => 'page',
+        'section' => 'content_pages'
+    );
 
     //  Add the Contact Page Selection
     $input['cp_contact'] = array(

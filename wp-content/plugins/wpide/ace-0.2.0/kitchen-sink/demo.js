@@ -3495,7 +3495,7 @@ function UndoManagerProxy(undoManager, session) {
 
 exports.Split = Split;
 });
-define('kitchen-sink/statusbar', ['require', 'exports', 'module' , 'ace/lib/dom', 'ace/lib/lang'], function(require, exports, module) {
+define('kitchen-sink/statusbar', ['require', 'exports', 'module' , 'ace/lib/dom', 'ace/lib/lang'], function(require, exports, module) {
 var dom = require("ace/lib/dom");
 var lang = require("ace/lib/lang");
 

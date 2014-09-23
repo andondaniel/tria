@@ -5,6 +5,7 @@ function tria_custom_add_query_vars($aVars) {
   $aVars[] = "blog_dir";
   $aVars[] = "drid";
   $aVars[] = "formid";
+  $aVars[] = "osmr";
   return $aVars;
 }
 add_filter('query_vars', 'tria_custom_add_query_vars');
@@ -49,6 +50,9 @@ function wen_get_speaker_info($speaker){
   }
   else{
     $output['speaker_full_name'] = $speaker['speaker_name'];
+    if(isset($speaker['external_profile_url']) && '' != $speaker['external_profile_url']){
+      $output['speaker_profile_url'] = esc_url($speaker['external_profile_url']);
+    }
   }
 
   if ( 1 == $speaker['use_default_picture'] ) {
@@ -95,7 +99,7 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
 
       $output .= '</li>';
       // wrapper start
-      $output .= '<div id="hover1" data-dropdown-content class="medium f-dropdown content row" >';
+      $output .= '<div id="drop1" class="f-dropdown" data-dropdown-content>';
 
         $custom_query_args = array(
           'post_type' => 'service',
@@ -110,13 +114,13 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
           );
         $services = get_posts($custom_query_args);
         if ( ! empty( $services ) ) {
-          $output .= '<div class="large-6 columns"><h3 class="menuhead">Services</h3><hr><div class="bignavul"><ul>';
+          $output .= '<p><strong>Services</strong></p><ul>';
           foreach ($services as $key => $serv) {
             $post = $serv;
             setup_postdata( $serv );
             $output .= '<li><a href="'.get_permalink( get_the_ID() ).'">'.get_the_title().'</a></li>';
           }
-          $output .= '</ul></div></div>';
+          $output .= '</ul>';
         }
         wp_reset_postdata();
         $custom_query_args = array(
@@ -132,18 +136,18 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
           );
         $services = get_posts($custom_query_args);
         if ( ! empty( $services ) ) {
-          $output .= ' <div class="large-6 columns"><h3 class="menuhead-2">Unique Programs at Tria</h3><hr><div class="bignavul"><ul>';
+          $output .= '<p><strong>Unique Programs at Tria</strong></p><ul>';
           foreach ($services as $key => $serv) {
             $post = $serv;
             setup_postdata( $serv );
             $output .= '<li><a href="'.get_permalink( get_the_ID() ).'">'.get_the_title().'</a></li>';
           }
-          $output .= '</ul></div></div>';
+          $output .= '</ul>';
         }
         wp_reset_postdata();
 
       // wrapper close
-      $output .= '<div class="clearfix"></div><a href="http://tria.snapagency.com/acute-injury-clinic/"><img src="http://tria.snapagency.com/wp-content/uploads/2014/09/dropdown-image-acute.jpg"></a></div>'; //end #drop1 div
+      $output .= '</div>'; //end #drop1 div
 
      }
      else{
@@ -218,9 +222,7 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
      */
     $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
     if( $our_page_id == $item->object_id ){
-      $atts['data-dropdown'] = 'hover1';
-      $atts['data-options']='is_hover:true';
-
+      $atts['data-dropdown'] = 'drop1';
 
     }
 
@@ -309,6 +311,29 @@ function tria_get_registration_url($post_meta, $meta_key = 'register_url' ){
   return $register_url;
 
 }
+////////////////////////////////////
+function tria_get_osm_registration_url($post_meta, $meta_key = 'register_url' ){
+
+  // nspre($post_meta,'p');
+
+  $register_url = 'javascript:void(0)';
+
+  if (!empty($post_meta[ $meta_key ])) {
+
+    $cp_osm_registration = wen_get_option('cp_osm_registration');
+
+    if (!empty($cp_osm_registration)) {
+      $args = array(
+        'osmr' => 'rid_'.base64_encode($post_meta[ $meta_key ])
+        );
+      $register_url = add_query_arg( $args, get_permalink( $cp_osm_registration ) );
+    }
+
+  }
+
+  return $register_url;
+
+}
 
 // hook the translation filters
 add_filter(  'gettext',  'tria_change_comment_to_feedback'  );
@@ -324,9 +349,42 @@ function tria_change_comment_to_feedback( $translated ) {
 // Extra column in Provider Starts
 add_filter('manage_edit-doctor_columns', 'tria_custom_add_new_columns_provider');
 function tria_custom_add_new_columns_provider( $columns ){
-    $columns['featured_provider'] = 'Featured';
+
+    $featured_text = __('Featured','tria');
+    $columns['featured_provider'] = $featured_text;
+    return $columns;
+
+}
+
+// Query manipulation for featured ordering
+add_filter( 'pre_get_posts', 'tria_query_featured_provider_ordering' );
+function tria_query_featured_provider_ordering($query){
+
+  if (is_admin()) {
+    global $pagenow;
+    if ( 'edit.php' == $pagenow ) {
+      if( isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == POST_TYPE_DOCTOR ){
+        if (isset($_REQUEST['orderby']) && 'featured' == $_REQUEST['orderby'] ) {
+          $order = ( isset($_REQUEST['order']) ) ? $_REQUEST['order']: '' ;
+          if (!empty($order)) {
+            $query->set('orderby','meta_value');
+            $query->set('meta_key','feature_doctor_on_homepage');
+            $query->set('order',$order);
+          }
+        }
+      }
+    }
+
+  }
+
+}
+////////////////
+add_filter( 'manage_edit-doctor_sortable_columns', 'tria_sortable_featured_provider_column' );
+function tria_sortable_featured_provider_column( $columns ) {
+    $columns['featured_provider'] = 'featured';
     return $columns;
 }
+////////////////
 
 add_action('manage_doctor_posts_custom_column', 'custom_manage_new_columns', 10, 2);
 function custom_manage_new_columns( $column_name, $id ){
@@ -374,6 +432,18 @@ function tria_custom_css_in_admin_head() {
   // nspre($screen);
   ?>
 
+  <?php if ('acf' != $screen->id): ?>
+    <style>
+
+      .field_type-date_time_picker{
+          width:47%;
+          float:left !important;
+          clear:initial !important;
+      }
+
+    </style>
+  <?php endif ?>
+
   <?php if ( 'edit-bodypart' == $screen->id && empty($_REQUEST['tag_ID']) ): ?>
   <style>
     body.taxonomy-bodypart .form-wrap {
@@ -407,5 +477,129 @@ function tria_custom_css_in_admin_head() {
   <?php endif ?>
 
   <?php
+
+}
+
+// Provider Title stuff
+
+
+function tria_provider_title_updater( $post_id ) {
+
+  $cur_post_type = get_post_type();
+
+  // Doctor ko title
+  if ( $cur_post_type == POST_TYPE_DOCTOR ) {
+
+    $my_post = array();
+    $my_post['ID'] = $post_id;
+    $dr_first_name  = get_field('dr_first_name', $post_id );
+    $dr_middle_name = get_field('dr_middle_name', $post_id );
+    $dr_last_name   = get_field('dr_last_name', $post_id );
+    $provider_name = $dr_first_name;
+    if (!empty($dr_middle_name)) {
+      $provider_name .= ' '.$dr_middle_name;
+    }
+    if (!empty($dr_last_name)) {
+      $provider_name .= ' '.$dr_last_name;
+    }
+    $my_post['post_title'] = $provider_name;
+    $my_post['post_name'] = sanitize_title($provider_name);
+
+    // Update the post into the database
+    wp_update_post( $my_post );
+
+  }
+
+  // Career ko title fix
+  if ( $cur_post_type == POST_TYPE_CAREER ){
+    $my_post = array();
+    $my_post['ID'] = $post_id;
+    $job_title  = get_field('job_title', $post_id );
+
+    $my_post['post_title'] = $job_title;
+    $my_post['post_name'] = sanitize_title($job_title);
+
+    wp_update_post( $my_post );
+
+  }
+
+  // OSM ko title fix
+  if ( $cur_post_type == POST_TYPE_OSM_CONFERENCE ){
+    $my_post = array();
+    $my_post['ID'] = $post_id;
+    $job_title  = get_field('oc_event_title', $post_id );
+
+    $my_post['post_title'] = $job_title;
+    $my_post['post_name'] = sanitize_title($job_title);
+
+    wp_update_post( $my_post );
+
+  }
+
+  // Tuesday ko title fix
+  if ( $cur_post_type == POST_TYPE_TUESDAY_CONFERENCE ){
+    $my_post = array();
+    $my_post['ID'] = $post_id;
+    $job_title  = get_field('tc_event_title', $post_id );
+
+    $my_post['post_title'] = $job_title;
+    $my_post['post_name'] = sanitize_title($job_title);
+
+    wp_update_post( $my_post );
+
+  }
+  // Smartbody Seminar ko title fix
+  if ( $cur_post_type == POST_TYPE_SEMINAR ){
+    $my_post = array();
+    $my_post['ID'] = $post_id;
+    $job_title  = get_field('seminar_title', $post_id );
+
+    $my_post['post_title'] = $job_title;
+    $my_post['post_name'] = sanitize_title($job_title);
+
+    wp_update_post( $my_post );
+
+  }
+
+}
+
+// run after ACF saves the $_POST['fields'] data
+add_action('acf/save_post', 'tria_provider_title_updater', 20);
+
+
+// Add JS define
+add_action('wp_head', 'tria_define_js_variables', 1);
+function tria_define_js_variables(){
+  ?>
+  <script>
+  var JS_TRIA = {};
+  JS_TRIA.site_url = '<?php echo home_url(); ?>';
+
+  </script>
+  <?php
+}
+
+// Get parent page for each post type
+function get_parent_page_for_post_type( $spost = null ){
+
+  global $post;
+  if (!$spost) {
+    $spost = $post;
+  }
+  $parent_page_id = '';
+  $current_post_type = $spost->post_type;
+  switch ($current_post_type) {
+    case POST_TYPE_SEMINAR:
+      $parent_page_id = wen_get_option('cp_seminar');
+      break;
+
+    case POST_TYPE_ACTIVITY:
+      $parent_page_id = wen_get_option('cp_conditions_n_treatments');
+      break;
+
+    default:
+      break;
+  }
+  return $parent_page_id;
 
 }

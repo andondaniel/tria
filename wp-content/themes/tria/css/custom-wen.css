@@ -59,6 +59,7 @@ body.not-home .top-bar-section ul>a:hover li {
     cursor: auto;
     background-position: 100% 50%;
     background-repeat: no-repeat no-repeat;
+    width:100%;
 }
 
 .subscribe-error, .subscribe-success {
@@ -150,16 +151,10 @@ body.page-template-templatefeedback-php div.wpcf7-mail-sent-ok {
 .slick-prev:before, .slick-next:before {
     line-height: 0 !important;
 }
-@media screen and (min-width: 900px) {
-    .slick-slide {
-        padding-top: 11.5%;
-    }
-}
-
 
 @media screen and (min-width: 1200px) {
     .slick-slide {
-        padding-top: 9.5%;
+        padding-top: 10.5%;
     }
 }
 
@@ -169,4 +164,10 @@ body.page-template-templatefeedback-php div.wpcf7-mail-sent-ok {
 }
 .page-template-templateosm-conference-php .events-tabs .tab-title:first-child {
     border-left: 1px solid #eeeeee;
+}
+
+.page-template-templateall-providers-php .provider-list{
+    list-style-type: none;
+    margin-left: 0;
+    margin-bottom: 15px;
 }

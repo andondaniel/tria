@@ -19,6 +19,8 @@ get_header(); ?>
 
         		<?php while ( have_posts() ) : the_post(); ?>
 
+                    <?php get_template_part( 'pagepart/activity', 'banner' ); ?>
+
         			<?php get_template_part( 'content', 'single_activity' ); ?>
 
         		<?php endwhile; ?>
