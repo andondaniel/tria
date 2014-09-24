@@ -5,18 +5,9 @@ get_header();
 
 <?php get_template_part('pagepart/slider', 'home'); ?>
 
-<div class="row">
-    <div class="large-12 columns">
-        <div class="row">
-            <div class="small-12 show-for-small"><br>
-                <img src="http://placehold.it/1000x600&text=For Small Screens"/>
-            </div>
-        </div>
-    </div>
-</div><br>
 
 <div class="full-width-row row">
-    <div class="large-12 columns pull-up nopad">
+    <div class="large-12 columns pull-slight nopad">
         <ul class="tabs" data-tab>
             <li class="tab-title active"><a href="#panel2-1">Make an Appointment</a></li>
             <li class="tab-title"><a href="#panel2-2">Our Services</a>
