@@ -16,7 +16,7 @@ get_header(); ?>
     <div class="large-12 columns">
 
       <?php get_sidebar(); ?>
-
+<div class="large-10">
 
       <?php while ( have_posts() ) : the_post(); ?>
 
@@ -24,7 +24,7 @@ get_header(); ?>
 
       <?php endwhile; ?>
 
-
+</div>
 
     </div>
   </div> <!-- .row -->

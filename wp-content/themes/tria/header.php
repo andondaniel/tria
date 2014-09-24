@@ -39,6 +39,7 @@
                             </h1>
                         </div>
                     </li>
+                    <div class="call-us"><a href="tel:952-831-8742"></a></div>
                     <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
                 </ul>
                 <section class="top-bar-section">

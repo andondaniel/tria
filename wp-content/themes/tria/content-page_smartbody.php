@@ -35,7 +35,7 @@ if($current_seminar) {
    </div>
 
    <div class="large-10 columns">
-     <div class="large-8 columns paddingforty">
+     <div class="large-8 columns paddingforty no-top-padding">
        <?php
        // nspre($current_seminar_metas,'current_seminar_metas');
        $image_url = '';
@@ -95,7 +95,7 @@ if($current_seminar) {
 
      </div>
 
-     <div class="large-4 columns paddingforty right-sidebar">
+     <div class="large-4 columns paddingforty right-sidebar no-top-padding">
 
        <?php get_sidebar('seminar'); ?>
 

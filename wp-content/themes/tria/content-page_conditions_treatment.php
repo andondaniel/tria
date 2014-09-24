@@ -35,10 +35,11 @@ $activities = get_posts($args_activity);
     </div>
 </div>
 <div class="large-10 columns">
+    <div class="large-6 columns">
     <div class="treatments-subtitle">
         <h3 id="numero2">Where does it hurt?</h3>
     </div>
-    <div class="large-6 columns">
+<div class="shrink">
         <div class="body-pain-points">
             <?php foreach($bodyparts as $bodypart) { ?>
             <a href="<?php echo get_term_link($bodypart); ?>" class="<?php echo get_field('body_part_class', $bodypart); ?> body-part"></a>
@@ -52,10 +53,11 @@ $activities = get_posts($args_activity);
             <a href="http://tria-prototype.snapagency.com/conditions-treatments.html" class="foot-and-ankle"></a>-->
         </div>
     </div>
-    <div class="treatments-subtitle">
+</div>
+    <div class="large-6 columns">
+        <div class="treatments-subtitle">
         <h3 id="numero3">What Makes it Hurt?</h3>
     </div>
-    <div class="large-6 columns">
         <div id="numero3"></div>
         <ul class="activity-pain">
         <?php if (!empty($wizard_tools)): ?>

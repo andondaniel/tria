@@ -99,7 +99,7 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
 
       $output .= '</li>';
       // wrapper start
-      $output .= '<div id="drop1" class="f-dropdown" data-dropdown-content>';
+      $output .= '<div id="hover1" data-dropdown-content class="medium f-dropdown content row" >';
 
         $custom_query_args = array(
           'post_type' => 'service',
@@ -114,13 +114,13 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
           );
         $services = get_posts($custom_query_args);
         if ( ! empty( $services ) ) {
-          $output .= '<p><strong>Services</strong></p><ul>';
+          $output .= '<div class="large-6 columns"><h3 class="menuhead-2">Services</h3><hr><div class="bignavul"><ul>';
           foreach ($services as $key => $serv) {
             $post = $serv;
             setup_postdata( $serv );
             $output .= '<li><a href="'.get_permalink( get_the_ID() ).'">'.get_the_title().'</a></li>';
           }
-          $output .= '</ul>';
+          $output .= '</ul></div></div>';
         }
         wp_reset_postdata();
         $custom_query_args = array(
@@ -136,18 +136,18 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
           );
         $services = get_posts($custom_query_args);
         if ( ! empty( $services ) ) {
-          $output .= '<p><strong>Unique Programs at Tria</strong></p><ul>';
+          $output .= '<div class="large-6 columns"><h3 class="menuhead-2">Unique Programs at Tria</h3><hr><div class="bignavul"><ul>';
           foreach ($services as $key => $serv) {
             $post = $serv;
             setup_postdata( $serv );
             $output .= '<li><a href="'.get_permalink( get_the_ID() ).'">'.get_the_title().'</a></li>';
           }
-          $output .= '</ul>';
+          $output .= '</ul></div></div>';
         }
         wp_reset_postdata();
 
       // wrapper close
-      $output .= '</div>'; //end #drop1 div
+      $output .= '<div class="clearfix"></div><a href="http://tria.snapagency.com/acute-injury-clinic/"><img src="http://tria.snapagency.com/wp-content/uploads/2014/09/dropdown-image-acute.jpg"></a></div>'; //end #drop1 div
 
      }
      else{
@@ -222,7 +222,8 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
      */
     $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
     if( $our_page_id == $item->object_id ){
-      $atts['data-dropdown'] = 'drop1';
+      $atts['data-dropdown'] = 'hover1';
+      $atts['data-options']='is_hover:true';
 
     }
 

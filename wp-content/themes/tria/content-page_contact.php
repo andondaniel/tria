@@ -1,7 +1,7 @@
 <?php
 $meta = get_fields();
  ?>
-        <div class="large-10 columns">
+        <div class="large-10 columns contact-column">
           <div class="large-12 columns nopadding margintop">
             <div class="large-4 columns first-panel"><h3>Information/Map</h3>
               <p class="twentypx">
