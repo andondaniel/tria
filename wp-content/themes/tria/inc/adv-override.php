@@ -434,7 +434,8 @@ function wen_save_page_customs($ID, $post) {
 
             foreach ($attributes['slug'] as $key => $slug ) {
                 if ( '' == $slug ) {
-                    $attributes['slug'][$key] = sanitize_title( $attributes['label'][$key] );
+                    $tax_key = sanitize_title( $attributes['label'][$key] );
+                    $attributes['slug'][$key] = str_replace('-', '', $tax_key);
                 }
             }
 

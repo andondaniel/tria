@@ -10,12 +10,15 @@
           <?php
           $footer_logo = wen_get_option('footer_logo');
           if (!empty($footer_logo)) {
-            echo '<img src="'.$footer_logo.'" />';
+            echo '<a href="'.home_url('/').'"><img src="'.$footer_logo.'" /></a>';
           }
            ?>
         </div>
         <div class="large-10 columns">
-                  <div class="large-12 columns">
+          <div class="large-10 columns">
+            <p><?php echo wen_get_option( 'copyright_text', '&copy 2014 Tria Orthopaedic' ); ?></p>
+          </div>
+        <div class="large-12 columns">
           <?php
              $args = array(
                'container' => false,
@@ -26,10 +29,6 @@
              wp_nav_menu( $args );
            ?>
         </div>
-	<div class="large-12 columns">
-            <p><?php echo wen_get_option( 'copyright_text', '&copy 2014 Tria Orthopaedic Center - 952-831-8742 - Minneapolis, MN. All 		Rights Reserved.' ); ?></p>
-          </div>
-
       </div>
     </div>
     </div>
@@ -40,8 +39,6 @@
 
   jQuery(document).foundation();
   jQuery(document).foundation('joyride', 'start');
-
 </script>
-<script src="<?php echo get_template_directory(); ?>/js/rem.js" type="text/javascript"></script>
 </body>
 </html>

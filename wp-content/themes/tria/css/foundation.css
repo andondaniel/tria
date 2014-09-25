@@ -1228,7 +1228,7 @@ meta.foundation-mq-topbar {
 /* Wrapped around .top-bar to contain to grid width */
 .contain-to-grid {
   width: 100%;
-  background: white; }
+  background: #333333; }
   .contain-to-grid .top-bar {
     margin-bottom: 0; }
 
@@ -1256,7 +1256,7 @@ meta.foundation-mq-topbar {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background: white;
+  background: #333333;
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -2636,35 +2636,20 @@ blockquote p {
 
 .tabs-content {
   margin-bottom: 1.5rem;
-  width: 100%;
-  display: block important!; }
-
-   @-webkit-keyframes fadeIn {
-      from { opacity: 0; }
-        to { opacity: 1; }
-  }
-  @keyframes fadeIn {
-      from { opacity: 0; }
-        to { opacity: 1; }
-  }
+  width: 100%; }
   .tabs-content:before, .tabs-content:after {
     content: " ";
     display: table; }
-  .tabs-co ntent:after {
+  .tabs-content:after {
     clear: both; }
   .tabs-content > .content {
     display: none;
     float: left;
-    padding: 0.9375em 0 0 0;
-    width:100%;
-  margin-left: 1px;}
+    padding: 0.9375em 0;
+    width: 100%; }
     .tabs-content > .content.active {
-      /* Customized */
-      -webkit-animation: fadeIn 1s;
-      animation: fadeIn 1s;
-      opacity: 1;
-
-      display: block; }
+      display: block;
+      float: none; }
     .tabs-content > .content.contained {
       padding: 0.9375em; }
   .tabs-content.vertical {
@@ -2760,33 +2745,33 @@ ul.pagination {
       font-weight: bold;
       text-transform: uppercase; }
 
-/*
-  Mixin: accordion-container()
+/* 
+  Mixin: accordion-container() 
 
   Decription: Responsible for the container component of accordions, generating styles relating to a margin of zero and a clearfix
 
-  Explicit Dependencies: a clearfix mixin *is* defined.
+  Explicit Dependencies: a clearfix mixin *is* defined. 
 
-  Implicit Dependencies: None
+  Implicit Dependencies: None 
 
 */
 /*
   Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family){
-
+  
     @params $bg-color: [ color or string ]: Specify the background color for the navigation element
     @params $hover-bg-color [ color or string ]: Specify the background color for the navigation element when hovered
-    @params $active-bg [ color or string ]: Specify the background color for the navigation element when clicked and not released.
-    @params $active_class [ string ]: Specify the class name used to keep track of which accordion tab should be visible
-    @params $font-color [ color or string ]: Color of the font for accordion
-    @params $font-size [ number ]: Specifiy the font-size of the text inside the navigation element
+    @params $active-bg [ color or string ]: Specify the background color for the navigation element when clicked and not released. 
+    @params $active_class [ string ]: Specify the class name used to keep track of which accordion tab should be visible 
+    @params $font-color [ color or string ]: Color of the font for accordion 
+    @params $font-size [ number ]: Specifiy the font-size of the text inside the navigation element 
     @params $font-family [ string ]: Specify the font family for the text of the navigation of the accorion
 */
 /*
 
-  Mixin: accordion-content($bg, $padding, $active-class)
-    @params $padding [ number ]: Padding for the content of the container
-    @params $bg [ color  ]: Background color for the content when it's visible
-    @params $active_class [ string ]: Class name used to keep track of which accordion tab should be visible.
+  Mixin: accordion-content($bg, $padding, $active-class) 
+    @params $padding [ number ]: Padding for the content of the container 
+    @params $bg [ color  ]: Background color for the content when it's visible 
+    @params $active_class [ string ]: Class name used to keep track of which accordion tab should be visible. 
 */
 .accordion {
   margin-bottom: 0; }

@@ -1,6 +1,9 @@
 
 jQuery(document).ready(function($) {
 
+    // Trigger lazy load
+    $("img.lazy").lazyload();
+
     // Search click
     $('#btn-main-search-button').click(function(e){
         e.preventDefault();
@@ -11,8 +14,60 @@ jQuery(document).ready(function($) {
         }
     });
 
+    // Provider load more
+    jQuery("#btn-load-more-provider").on('click',function(e){
+      e.preventDefault();
+      var $this = $(this);
+      // console.log($this.data());
+      // alert('Please load more');
+      var dataObject = new Object();
+      dataObject.filters        = $this.data();
+      dataObject.action        = 'load_more_provider';
+      // dataObject.next_page = $this.data('next-page');
+      if ( 0 == dataObject.next_page ) {
+        return false;
+      }
+      // console.log(dataObject);return;
+      jQuery.ajax({
+        method: 'POST',
+        url : TRIA_OBJ.ajax_url,
+        data : dataObject,
+        beforeSend: function(){
+            $('#loading-provider').show();
+        },
+        success: function(response){
+
+            $('#loading-provider').hide();
+
+            if ( 1 == response.success ) {
+                if( 1 == response.has_content){
+
+                    $('#container-providers').append(response.content);
+                    $("img.lazy",'#container-providers').lazyload();
+
+                }
+                if( 1 == response.has_next_page){
+
+                    $this.data('next_page',response.next_page);
+
+                }
+                else{
+                    $this.data('next_page',0);
+                    $this.parent().addClass('hide-me');
+                }
 
 
+            }
+
+        }
+      });
+
+    });
+
+
+
+
+    // Slider
     $('.responsive').slick({
         dots: true,
         infinite: false,

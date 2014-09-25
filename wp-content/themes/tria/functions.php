@@ -1,5 +1,4 @@
 <?php
-
 //  Set Unicode utf-8
 ini_set('default_charset', 'utf-8');
 

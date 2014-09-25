@@ -1,8 +1,3 @@
-<style>
-  .hide-me{
-    display: none;
-  }
-</style>
   <?php
   $meta = get_fields();
   // nspre($meta);
@@ -170,11 +165,7 @@
         <?php
           $custom_query_args = array(
             'post_type'      => POST_TYPE_DOCTOR,
-            'posts_per_page' => wen_get_option('provider_per_page',2),
-            'orderby'        => 'meta_value title',
-            'order'          => 'asc',
-            'meta_key'       => 'dr_last_name',
-
+            'posts_per_page' => -1,
             );
           // $custom_query_args['paged'] = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
           // nspre($_REQUEST['dr_name'],'name');
@@ -236,7 +227,6 @@
           // nspre($custom_query_args,'args');
 
           $custom_query = new WP_Query( $custom_query_args );
-          // nspre($custom_query,'cq');
          ?>
          <?php
          // Pagination fix
@@ -247,54 +237,67 @@
          ?>
          <?php if ( $custom_query->have_posts() ) : ?>
 
-         <div id="container-providers" style="border:1px #FFFFFF solid; display:block; height:auto; overflow:hidden;">
            <!-- the loop -->
            <?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
 
             <?php
-            // $post_meta = get_fields();
+            $post_meta = get_fields();
              ?>
 
-           <?php get_template_part('pagepart/fap','item'); ?>
+            <div class="large-12 columns">
+              <div class="large-4 columns doctor-photo">
+                <a href="<?php the_permalink(); ?>">
+                  <?php
+                  $dr_image_url = 'http://placehold.it/199x199&text=No+Image';
+                  if ( !empty($post_meta['dr_image'])  ) {
+                    $dr_image_url = $post_meta['dr_image']['url'];
+                  }
+                   ?>
+                   <img class="lazy" data-original="<?php echo $dr_image_url; ?>" alt="<?php the_title_attribute(); ?>" width="199" height="199" />
+                 </a>
+
+              </div>
+              <div class="large-8 columns doctor-description">
+                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                <p class="dr-title-inner"><?php echo $post_meta['dr_specialty']; ?></p>
+                  <?php
+                  $dr_description = $post_meta['dr_description'];
+                  // nspre($post_meta);
+                  echo '<p>'.wen_the_excerpt( $dr_description, 40, true ) . '</p>';
+                  ?>
+                  <?php
+                  $appointment_url = 'javascript:void(0)';
+                  $cp_schedule_appointment = wen_get_option('cp_schedule_appointment');
+
+
+                  if (!empty( $cp_schedule_appointment )) {
+                      $qargs = array(
+                        'drid' => get_the_ID(),
+                        );
+                      $appointment_url = add_query_arg( $qargs, get_permalink($cp_schedule_appointment ) );
+                  }
+                   ?>
+
+
+
+              </div>
+            </div>
 
 
            <?php endwhile; ?>
            <!-- end of the loop -->
-
-
-
-           </div><!-- #container-providers -->
-
+           <div style="clear:both; margin:20px 0;">
+           <?php
+             // Custom query loop pagination
+             // previous_posts_link( 'Previous Page' );
+             // next_posts_link( 'Next Page', $custom_query->max_num_pages );
+             ?>
+           </div>
 
          <?php else: ?>
           <p><strong>Not found</strong></p>
 
          <?php endif; ?>
-
-
-         <?php
-          $data_text = '';
-          $data_arr = array();
-          $data_arr['data-next_page'] = 2;
-          if (!empty($_GET)) {
-            foreach ($_GET as $k => $g) {
-              $data_arr['data-'.$k] = esc_attr($g);
-            }
-          }
-          if (!empty($data_arr)) {
-            foreach ($data_arr as $key => $d) {
-              $data_text .= ' '. $key.'="'.$d.'" ';
-            }
-          }
-          ?>
-         <?php if ( $custom_query->max_num_pages > 1 ): ?>
-          <p style="margin:20px;">
-            <a href="#" id="btn-load-more-provider" <?php echo $data_text; ?> style="outline:none;" class="button">
-              View more
-            </a>
-            <span id="loading-provider" style="display:none; margin-left:10px;"><img src="<?php echo get_template_directory_uri();?>/img/loading.gif" alt="Loading..." /></span>
-          </p>
-         <?php endif ?>
 
          <?php
          // Reset postdata
@@ -306,5 +309,12 @@
          $wp_query = NULL;
          $wp_query = $temp_query;
          ?>
-
 </div> <!-- large-10 columns header-column -->
+
+<script>
+  jQuery(document).ready(function($){
+    $("img.lazy").lazyload({
+        effect : "fadeIn"
+    });
+  });
+</script>

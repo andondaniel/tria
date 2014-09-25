@@ -32,7 +32,7 @@ function wen_tile_row_generator($post_id = null, $column_size = null, $class = n
         foreach($display_tiles as $display_tile_id) {
 
             //  Add the Tile
-            $output .= '<div class="large-' . $column_size . ' ' . (string)$class . ' medium-6 small-12 columns post-title-custom">' . wen_tile_generator($display_tile_id) . '</div>';
+            $output .= '<div class="large-' . $column_size . ' ' . (string)$class . ' columns post-title-custom">' . wen_tile_generator($display_tile_id) . '</div>';
         }
 
         //  Check for Wrapper Required
@@ -283,7 +283,7 @@ function wen_print_upcoming_events($upcoming_events, $identifier = 'seminar_date
     <?php foreach($upcoming_events as $upcoming_event) { ?>
     <div class="upcoming-event">
         <p>
-            <b><?php echo apply_filters('the_title', $upcoming_event->post_title); ?></b>
+            <b><a href="<?php echo get_permalink($upcoming_event->ID ); ?>"><?php echo apply_filters('the_title', $upcoming_event->post_title); ?></a></b>
             <?php echo date($date_format, strtotime(get_field($identifier, $upcoming_event->ID) . ' ' . get_field($identifier2, $upcoming_event->ID))); ?>
         </p>
     </div>
@@ -314,7 +314,7 @@ function wen_print_past_events($past_events, $style = 1, $identifier = 'seminar_
         <div id="panel<?php echo $i; ?>" class="content <?php echo ($i == 1 ? 'active' : ''); ?>">
             <?php foreach($pEvents as $pEvent) { ?>
             <p>
-                <b><?php echo apply_filters('the_title', $pEvent->post_title); ?></b>
+                <b><a href="<?php echo get_permalink( $pEvent->ID ); ?>"><?php echo apply_filters('the_title', $pEvent->post_title); ?></a></b>
                 <?php echo date($date_format, strtotime(get_field($identifier, $pEvent->ID) . ' ' . get_field($identifier2, $pEvent->ID))); ?>
             </p>
             <?php } ?>
@@ -334,6 +334,7 @@ function wen_newsletter_form() {
     <form action="" method="post" class="mailing-subscribe-form">
         <?php wp_nonce_field('wen-newsletter-subscribe', '_wen_newsletter'); ?>
         <input type="email" name="email" class="required email" id="mce-EMAIL" placeholder="Email" required />
+        <br />
         <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
     </form>
 </div>

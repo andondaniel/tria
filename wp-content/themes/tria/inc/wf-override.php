@@ -6,6 +6,11 @@ function tria_wen_sections($input) {
     //  Remove Advance Section
     unset($input['advance']);
 
+    //  Add the Find a Provider Section
+    $input['section_find_a_provider'] = array(
+        'id' => 'section_find_a_provider',
+        'title' => __('Find a Provider', TEXT_DOMAIN),
+    );
     //  Add the Content Pages Section
     $input['content_pages'] = array(
         'id' => 'content_pages',
@@ -44,6 +49,16 @@ function tria_wen_fields($input) {
     unset($input['flag_site_description']);
     unset($input['flag_comment_in_page']);
 
+    //  Add the Footer Logo Support
+    $input['provider_per_page'] = array(
+        'id' => 'provider_per_page',
+        'label' => __('Provider per page', TEXT_DOMAIN),
+        'desc' => __('Select Provider per page', TEXT_DOMAIN),
+        'type' => 'numeric_slider',
+        'std' => 10,
+        'min_max_step' => '2,20,2',
+        'section' => 'section_find_a_provider',
+    );
     //  Add the Footer Logo Support
     $input['footer_logo'] = array(
         'id' => 'footer_logo',
