@@ -1,0 +1,7 @@
+wp-config.php
+wp-content/logs/
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+.ftpquota
+error_log
