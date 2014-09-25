@@ -99,7 +99,7 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
 
       $output .= '</li>';
       // wrapper start
-      $output .= '<div id="hover1" data-dropdown-content class="medium f-dropdown content row" >';
+      $output .= '<div id="drop1" class="f-dropdown" data-dropdown-content>';
 
         $custom_query_args = array(
           'post_type' => 'service',
@@ -114,13 +114,13 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
           );
         $services = get_posts($custom_query_args);
         if ( ! empty( $services ) ) {
-          $output .= '<div class="large-6 columns"><h3 class="menuhead-2">Services</h3><hr><div class="bignavul"><ul>';
+          $output .= '<p><strong>Services</strong></p><ul>';
           foreach ($services as $key => $serv) {
             $post = $serv;
             setup_postdata( $serv );
             $output .= '<li><a href="'.get_permalink( get_the_ID() ).'">'.get_the_title().'</a></li>';
           }
-          $output .= '</ul></div></div>';
+          $output .= '</ul>';
         }
         wp_reset_postdata();
         $custom_query_args = array(
@@ -136,18 +136,18 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
           );
         $services = get_posts($custom_query_args);
         if ( ! empty( $services ) ) {
-          $output .= '<div class="large-6 columns"><h3 class="menuhead-2">Unique Programs at Tria</h3><hr><div class="bignavul"><ul>';
+          $output .= '<p><strong>Unique Programs at Tria</strong></p><ul>';
           foreach ($services as $key => $serv) {
             $post = $serv;
             setup_postdata( $serv );
             $output .= '<li><a href="'.get_permalink( get_the_ID() ).'">'.get_the_title().'</a></li>';
           }
-          $output .= '</ul></div></div>';
+          $output .= '</ul>';
         }
         wp_reset_postdata();
 
       // wrapper close
-      $output .= '<div class="clearfix"></div><a href="http://tria.snapagency.com/acute-injury-clinic/"><img src="http://tria.snapagency.com/wp-content/uploads/2014/09/dropdown-image-acute.jpg"></a></div>'; //end #drop1 div
+      $output .= '</div>'; //end #drop1 div
 
      }
      else{
@@ -222,8 +222,7 @@ class tria_walker_nav_menu extends Walker_Nav_Menu{
      */
     $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
     if( $our_page_id == $item->object_id ){
-      $atts['data-dropdown'] = 'hover1';
-      $atts['data-options']='is_hover:true';
+      $atts['data-dropdown'] = 'drop1';
 
     }
 
@@ -602,5 +601,127 @@ function get_parent_page_for_post_type( $spost = null ){
       break;
   }
   return $parent_page_id;
+
+}
+
+// Ajax load more provider
+
+add_action( 'wp_ajax_load_more_provider', 'wen_load_more_provider_callback' );
+add_action( 'wp_ajax_nopriv_load_more_provider', 'wen_load_more_provider_callback' );
+
+function wen_load_more_provider_callback(){
+
+  $next_page = (int)$_POST['filters']['next_page'];
+  $filters = $_POST['filters'];
+  unset($filters['next_page']);
+
+  $output = array();
+  $output['success'] = 0;
+  $output['has_content'] = 0;
+  $output['has_next_page'] = 0;
+
+  // get provider data
+  $custom_query_args = array(
+    'post_type'      => POST_TYPE_DOCTOR,
+    'posts_per_page' => wen_get_option('provider_per_page',2),
+    'paged'          => $next_page,
+    'orderby'        => 'meta_value title',
+    'order'          => 'asc',
+    'meta_key'       => 'dr_last_name',
+    );
+  // Check if any filters
+  if (!empty($filters)) {
+    //
+    // Name
+    if (isset($filters['pname']) && !empty($filters['pname'])) {
+      $custom_query_args['s'] = urldecode($filters['pname']);
+    }
+    // Provider type
+    if ( isset($filters['provider']) && intval($filters['provider']) > 0 ) {
+      $custom_query_args['tax_query'][] = array(
+        'taxonomy' => 'doc_ptype',
+        'field'    => 'id',
+        'terms'    => array( intval($filters['provider']) ),
+        'operator' => 'IN',
+        );
+    }
+    // Interest
+    if ( isset($filters['interest']) && intval($filters['interest']) > 0 ) {
+      $custom_query_args['tax_query'][] = array(
+        'taxonomy' => 'doc_interest',
+        'field'    => 'id',
+        'terms'    => array( intval($filters['interest']) ),
+        'operator' => 'IN',
+        );
+    }
+    // Custom filters
+    $custom_filters_params = array();
+    foreach ($filters as $rkey => $req) {
+      $ps = strpos( $rkey, 'filter_');
+      if ( false !== $ps ) {
+        $fkey = str_replace('filter_', '', $rkey);
+        if ($req > 0) {
+          $custom_filters_params[$fkey]= $req;
+        }
+      }
+    }
+    if (!empty($custom_filters_params)) {
+      foreach ($custom_filters_params as $cfp_key => $cfp_value) {
+        $custom_query_args['tax_query'][] = array(
+          'taxonomy' => 'df_'.$cfp_key,
+          'field'    => 'id',
+          'terms'    => array( intval( $cfp_value ) ),
+          'operator' => 'IN',
+          );
+      }
+    }
+    // print_r($custom_filters_params);
+
+  } // end if not empty filters
+
+
+  // Start Wp Query
+  $custom_query = new WP_Query( $custom_query_args );
+  ob_start();
+  if ( $custom_query->have_posts() ) :
+
+    while ( $custom_query->have_posts() ) : $custom_query->the_post();
+
+      ?>
+
+      <?php get_template_part('pagepart/fap','item'); ?>
+
+      <?php
+
+    endwhile;
+
+  endif;
+
+
+  wp_reset_postdata();
+  // nspre($custom_query);
+
+  $content = ob_get_contents();
+  ob_end_clean();
+
+
+
+
+
+  // print_r($_POST);
+  // $content = '<p>Content of page '.$next_page.'</p>';
+  $output['content'] = $content;
+  $output['success'] = 1;
+  $output['has_content'] = 1;
+  $output['has_next_page'] = 1;
+  $output['next_page'] = $next_page + 1;
+
+  if ($next_page == $custom_query->max_num_pages ) {
+    $output['has_next_page'] = 0;
+    $output['next_page'] = 0;
+  }
+
+  wp_send_json($output);
+
 
 }

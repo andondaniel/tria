@@ -32,7 +32,7 @@ $post_arr = get_posts($args);
             <hr>
           </div>
         </div>
-        <div class="large-12 columns no-right-padding">
+        <div class="large-12 columns">
           <ul class="tabs events-tabs" data-tab>
             <li class="tab-title active"><a href="#panel2-1">Speakers &amp; Topics</a></li>
             <li class="tab-title"><a href="#panel2-2">Topics</a></li>

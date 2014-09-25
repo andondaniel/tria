@@ -11,6 +11,7 @@ define('TEXT_DOMAIN', $theme_data->get('TextDomain'));
 //define( 'DISABLE_ADMIN_BAR', false );
 
 define( 'DISABLE_OPTION_EXPORT_IMPORT', true );
+define( 'DISABLE_CUSTOM_LOGIN', true );
 
 require trailingslashit( get_template_directory() ) . 'wen-framework/init.php';
 
